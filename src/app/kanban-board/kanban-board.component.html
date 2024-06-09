@@ -1,0 +1,37 @@
+<div class="container border rounded">
+  <div>
+    <button type="button" class="btn btn-primary" (click)="addStage()">
+      Add stage +
+    </button>
+  </div>
+  <div class="">
+    <div
+      cdkDropList
+      cdkDropListOrientation="horizontal"
+      class="kanban-content"
+      (cdkDropListDropped)="drop($event)"
+    >
+      @for ( s of stages; track s.id) {
+      <div class="stage" cdkDrag>
+        <div class="stage-title">
+          <input class="form-control" [(ngModel)]="s.label" />
+        </div>
+        <div id="stage-{{s.id}}-card-list"
+            class="stage-content"
+            cdkDropList
+            [cdkDropListData]="s.cards"
+            (cdkDropListDropped)="dropCard($event)"
+            [cdkDropListConnectedTo]="cardListIds">
+          <!-- <pre>.{{s.cards | json}}.</pre> -->
+          <div class="card" cdkDrag *ngFor="let c of s.cards">{{ c.subject }}</div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+
+  <!-- <div class="sticky-note" cdkDrag>Drag me around</div> -->
+  <div>
+    <pre>{{stages | json}}</pre>
+  </div>
+</div>
