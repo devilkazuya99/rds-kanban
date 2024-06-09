@@ -1,6 +1,8 @@
 <div class="container border rounded">
   <div>
-    <button type="button" class="btn btn-primary" (click)="addStage()">
+    <a class="pure-button me-1" routerLink="">Dashboard</a>
+    <a class="pure-button me-1">{{ board?.name }}</a>
+    <button type="button" class="pure-button" (click)="addStage()">
       Add stage +
     </button>
   </div>
@@ -9,29 +11,34 @@
       cdkDropList
       cdkDropListOrientation="horizontal"
       class="kanban-content"
-      (cdkDropListDropped)="drop($event)"
-    >
-      @for ( s of stages; track s.id) {
-      <div class="stage" cdkDrag>
-        <div class="stage-title">
-          <input class="form-control" [(ngModel)]="s.label" />
-        </div>
-        <div id="stage-{{s.id}}-card-list"
+      (cdkDropListDropped)="drop($event)">
+      @for (s of board?.stages; track s.id) {
+        <div class="stage" cdkDrag>
+          <div class="stage-title">
+            <input class="form-control" [(ngModel)]="s.label" />
+          </div>
+          <div
+            id="stage-{{ s.id }}-card-list"
             class="stage-content"
             cdkDropList
             [cdkDropListData]="s.cards"
             (cdkDropListDropped)="dropCard($event)"
             [cdkDropListConnectedTo]="cardListIds">
-          <!-- <pre>.{{s.cards | json}}.</pre> -->
-          <div class="card" cdkDrag *ngFor="let c of s.cards">{{ c.subject }}</div>
+            <!-- <pre>.{{s.cards | json}}.</pre> -->
+            @for (card of s.cards; track $index) {
+              <rds-card cdkDrag [card]="card"> </rds-card>
+            }
+            <div>
+              <button (click)="addCard(s.id)">Add</button>
+            </div>
+          </div>
         </div>
-      </div>
       }
     </div>
   </div>
 
   <!-- <div class="sticky-note" cdkDrag>Drag me around</div> -->
   <div>
-    <pre>{{stages | json}}</pre>
+    <pre>{{ board?.stages | json }}</pre>
   </div>
 </div>

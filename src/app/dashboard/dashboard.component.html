@@ -1,0 +1,21 @@
+<div>
+  <form class="pure-form">
+    <fieldset>
+      <input type="text" [(ngModel)]="newBoardName" name="newBoardName" />
+      <button type="button" class="pure-button" (click)="addNewBoard()">
+        Add New Board
+      </button>
+    </fieldset>
+  </form>
+</div>
+
+<div>
+  <p>Boards</p>
+  <ul>
+    <li *ngFor="let b of boards">
+      {{ b.name }}
+      <a class="view-link" [routerLink]="'board/' + b.id">view</a>
+      <a class="delete-link" href="#">delete</a>
+    </li>
+  </ul>
+</div>

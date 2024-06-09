@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   CdkDragDrop,
   CdkDrag,
@@ -8,33 +8,47 @@ import {
 } from '@angular/cdk/drag-drop';
 import { CommonModule, JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-interface Card {
-  id: number;
-  subject: string;
-}
-interface Stage {
-  id: number;
-  label: string;
-  cards: Card[];
-}
+import { CardComponent } from '../card/card.component';
+import { Board, Card, Stage } from '../model/base.model';
+import { KanbanBoardService } from './kanban-board.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'rds-kanban-board',
   standalone: true,
-  imports: [CdkDrag, CdkDropList, CommonModule, FormsModule, JsonPipe],
+  imports: [CdkDrag, CdkDropList, CommonModule, FormsModule, JsonPipe, CardComponent, RouterLink],
   templateUrl: './kanban-board.component.html',
   styleUrl: './kanban-board.component.scss',
 })
 export class KanbanBoardComponent {
+
+  constructor(private service: KanbanBoardService) { }
+
+  loadBoard(id: number) {
+    this.service.getBoard(id).subscribe({
+      next: board => {
+        console.log('Board: ', board);
+        this.board = board;
+        const arr = this.board.stages?.flatMap((stg) => {
+          return stg.cards.flatMap((card) => { return card.id; });
+        });
+        if (arr) {
+          console.log('arr max =', Math.max(...arr));
+          this.cardNo = Math.max(...arr);
+        }
+      }
+    });
+  }
+
+  @Input()
+  set id(id: number) {
+    this.loadBoard(id);
+  }
+
+  board?: Board;
   stageNo = 0;
   cardNo = 0;
   cardListIds: string[] = [];
-  stages: Stage[] = [
-    this.createNewStage('TODO'),
-    this.createNewStage('In Progress'),
-    this.createNewStage('Done'),
-  ];
 
   private createNewStage(label?: string) {
     const cards: Card[] = [];
@@ -47,11 +61,39 @@ export class KanbanBoardComponent {
   }
 
   addStage() {
-    this.stages.push(this.createNewStage());
+    this.board?.stages?.push(this.createNewStage());
+  }
+
+  saveBoard() {
+    if (this.board) {
+      const boardId = this.board.id;
+      this.service.saveBoard(this.board).subscribe({
+        next: () => {
+          console.log('Save board successfully.');
+          this.loadBoard(boardId);
+        }
+      });
+    }
+  }
+
+  addCard(stageId: number) {
+    if (this.board && this.board.stages) {
+      this.board.stages.forEach(stage => {
+        if (stage.id === stageId) {
+          console.log(`Adding new card to stage: ${stageId}`);
+          stage.cards.push({ id: ++this.cardNo, subject: 'Card ' + this.cardNo });
+        }
+      });
+      console.log(`Saving board: ${this.board.id}`);
+      this.saveBoard();
+    }
   }
 
   drop(event: CdkDragDrop<Stage[]>) {
-    moveItemInArray(this.stages, event.previousIndex, event.currentIndex);
+    if (this.board && this.board.stages) {
+      moveItemInArray(this.board.stages, event.previousIndex, event.currentIndex);
+      this.saveBoard();
+    }
   }
 
   dropCard(event: CdkDragDrop<Card[]>) {
@@ -65,5 +107,6 @@ export class KanbanBoardComponent {
         event.currentIndex,
       );
     }
+    this.saveBoard();
   }
 }

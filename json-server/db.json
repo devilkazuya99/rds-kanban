@@ -1,5 +1,138 @@
 {
   "user": {
     "name": "Developer"
-  }
+  },
+  "boards": [
+    {
+      "id": 9184877,
+      "name": "TEST  1",
+      "stages": [
+        {
+          "id": 1891442,
+          "label": "TODO",
+          "cards": []
+        },
+        {
+          "id": 2860607,
+          "label": "IN PROGRESS",
+          "cards": []
+        },
+        {
+          "id": 4072032,
+          "label": "DONE",
+          "cards": []
+        }
+      ]
+    },
+    {
+      "id": 3959070,
+      "name": "TEST 2",
+      "stages": [
+        {
+          "id": 2646383,
+          "label": "TODO",
+          "cards": [
+            {
+              "id": 1,
+              "subject": "Card 1"
+            },
+            {
+              "id": 10,
+              "subject": "Card 10"
+            },
+            {
+              "id": 9,
+              "subject": "Card 9"
+            }
+          ]
+        },
+        {
+          "id": 8584231,
+          "label": "IN PROGRESS",
+          "cards": [
+            {
+              "id": 6,
+              "subject": "Card 6"
+            },
+            {
+              "id": 4,
+              "subject": "Card 4"
+            },
+            {
+              "id": 11,
+              "subject": "Card 11"
+            },
+            {
+              "id": 2,
+              "subject": "Card 2"
+            }
+          ]
+        },
+        {
+          "id": 683956,
+          "label": "DONE",
+          "cards": [
+            {
+              "id": 3,
+              "subject": "Card 3"
+            },
+            {
+              "id": 5,
+              "subject": "Card 5"
+            },
+            {
+              "id": 7,
+              "subject": "Card 7"
+            },
+            {
+              "id": 8,
+              "subject": "Card 8"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 9637733,
+      "name": "TEST 3",
+      "stages": [
+        {
+          "id": 8122471,
+          "label": "TODO",
+          "cards": []
+        },
+        {
+          "id": 2427282,
+          "label": "IN PROGRESS",
+          "cards": []
+        },
+        {
+          "id": 9263628,
+          "label": "DONE",
+          "cards": []
+        }
+      ]
+    },
+    {
+      "id": 2423444,
+      "name": "TEST 4",
+      "stages": [
+        {
+          "id": 7604731,
+          "label": "TODO",
+          "cards": []
+        },
+        {
+          "id": 2249819,
+          "label": "IN PROGRESS",
+          "cards": []
+        },
+        {
+          "id": 8404210,
+          "label": "DONE",
+          "cards": []
+        }
+      ]
+    }
+  ]
 }

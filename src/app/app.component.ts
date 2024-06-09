@@ -6,7 +6,8 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   selector: 'rds-root',
   standalone: true,
   imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'rds-kanban';
