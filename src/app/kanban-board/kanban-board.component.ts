@@ -5,6 +5,7 @@ import {
   CdkDropList,
   moveItemInArray,
   transferArrayItem,
+  CdkDragPlaceholder,
 } from '@angular/cdk/drag-drop';
 import { CommonModule, JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -16,7 +17,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'rds-kanban-board',
   standalone: true,
-  imports: [CdkDrag, CdkDropList, CommonModule, FormsModule, JsonPipe, CardComponent, RouterLink],
+  imports: [CdkDrag, CdkDropList, CdkDragPlaceholder, CommonModule, FormsModule, JsonPipe, CardComponent, RouterLink],
   templateUrl: './kanban-board.component.html',
   styleUrl: './kanban-board.component.scss',
 })
@@ -36,6 +37,7 @@ export class KanbanBoardComponent {
           console.log('arr max =', Math.max(...arr));
           this.cardNo = Math.max(...arr);
         }
+        this.cardListIds = (this.board.stages?.map(stg => `stage-${stg.id}-card-list`)) || [];
       }
     });
   }
@@ -107,6 +109,11 @@ export class KanbanBoardComponent {
         event.currentIndex,
       );
     }
+    this.saveBoard();
+  }
+
+  changeLabel(id: number, label: string) {
+    console.log(id, ':', label);
     this.saveBoard();
   }
 }

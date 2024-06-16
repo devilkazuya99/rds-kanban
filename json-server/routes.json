@@ -1,5 +1,7 @@
 {
   "/svc/user": "/user",
   "/svc/boards": "/boards",
-  "/svc/boards/:id": "/boards/:id"
+  "/svc/boards/:id": "/boards/:id",
+  "/svc/boards/:bid/stages": "/boards/:bid/stages",
+  "/svc/boards/:bid/stages/:sid": "/boards/:bid/stages/:sid"
 }

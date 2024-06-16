@@ -1,4 +1,21 @@
-<div class="card">
+<div class="card" *ngIf="card">
   <div class="custom-placeholder" *cdkDragPlaceholder></div>
-  {{ card?.subject }}
+  <form class="pure-form">
+    @if (editLabelMode) {
+      <input
+        name="subject"
+        [(ngModel)]="card.subject"
+        (blur)="disableEidt()"
+        class="subject_txt"
+        #subjectTxt />
+    } @else {
+      <span class="subject" (click)="enableEdit()">{{ card.subject }}</span>
+    }
+  </form>
+  <div class="dots">
+    <span class="dot_red">●</span>
+    <span class="dot_yellow">●</span>
+    <span class="dot_green">●</span>
+    <span class="dot_blue">●</span>
+  </div>
 </div>

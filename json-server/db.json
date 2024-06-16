@@ -47,28 +47,6 @@
           ]
         },
         {
-          "id": 8584231,
-          "label": "IN PROGRESS",
-          "cards": [
-            {
-              "id": 6,
-              "subject": "Card 6"
-            },
-            {
-              "id": 4,
-              "subject": "Card 4"
-            },
-            {
-              "id": 11,
-              "subject": "Card 11"
-            },
-            {
-              "id": 2,
-              "subject": "Card 2"
-            }
-          ]
-        },
-        {
           "id": 683956,
           "label": "DONE",
           "cards": [
@@ -87,6 +65,46 @@
             {
               "id": 8,
               "subject": "Card 8"
+            }
+          ]
+        },
+        {
+          "id": 8584231,
+          "label": "IN PROGRESS",
+          "cards": [
+            {
+              "id": 6,
+              "subject": "Card 6"
+            },
+            {
+              "id": 13,
+              "subject": "Card 13"
+            },
+            {
+              "id": 11,
+              "subject": "Card 11"
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "label": "Rejected",
+          "cards": [
+            {
+              "id": 12,
+              "subject": "Card 12"
+            },
+            {
+              "id": 14,
+              "subject": "Card 14"
+            },
+            {
+              "id": 2,
+              "subject": "Card 2"
+            },
+            {
+              "id": 4,
+              "subject": "Card 4"
             }
           ]
         }

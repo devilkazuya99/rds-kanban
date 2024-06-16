@@ -14,8 +14,12 @@
       (cdkDropListDropped)="drop($event)">
       @for (s of board?.stages; track s.id) {
         <div class="stage" cdkDrag>
+          <div class="stage custom-placeholder" *cdkDragPlaceholder></div>
           <div class="stage-title">
-            <input class="form-control" [(ngModel)]="s.label" />
+            <input
+              class="form-control"
+              [(ngModel)]="s.label"
+              (input)="changeLabel(s.id, s.label)" />
           </div>
           <div
             id="stage-{{ s.id }}-card-list"
